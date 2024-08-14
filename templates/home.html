@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>MTG Deck Builder</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='base.css') }}"
+    />
+  </head>
+  <body>
+    <h1>Pick a card, and we will give you a deck based on your choice!</h1>
+
+    <form method="POST" action="/search">
+      <input
+        type="text"
+        name="card_name"
+        placeholder="Enter card name"
+        required
+      />
+      <button type="submit">Search</button>
+    </form>
+
+    {% if cards %}
+    <h2>Search Results:</h2>
+    <div class="card-container">
+      {% for card in cards %}
+      <div class="card">
+        <h3>{{ card.name }}</h3>
+        <p><strong>Mana Cost:</strong> {{ card.mana_cost }}</p>
+        <p><strong>Type:</strong> {{ card.type }}</p>
+        <p><strong>Set:</strong> {{ card.set_name }}</p>
+        <p><strong>Text:</strong> {{ card.text }}</p>
+        {% if card.image_url %}
+        <img src="{{ card.image_url }}" alt="{{ card.name }}" />
+        {% else %}
+        <p>No image available</p>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p>No cards found with that name.</p>
+    {% endif %}
+  </body>
+</html>
