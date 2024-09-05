@@ -9,7 +9,9 @@
     />
   </head>
   <body>
-    <h1>Pick a card, and we will give you a deck based on your choice!</h1>
+    <h1>
+      Pick a card, and we will give you a commander deck based on your choice!
+    </h1>
 
     <form method="POST" action="/search">
       <input
@@ -25,7 +27,7 @@
     <h2>Search Results:</h2>
     <div class="card-container">
       {% for card in cards %}
-      <div class="card">
+      <div class="card" onclick="selectCommander('{{ card.name }}')">
         <h3>{{ card.name }}</h3>
         <p><strong>Mana Cost:</strong> {{ card.mana_cost }}</p>
         <p><strong>Type:</strong> {{ card.type }}</p>
@@ -33,12 +35,25 @@
         <p><strong>Text:</strong> {{ card.text }}</p>
         {% if card.image_url %}
         <img src="{{ card.image_url }}" alt="{{ card.name }}" />
-        {% else %}
-        <p>No image available</p>
         {% endif %}
       </div>
       {% endfor %}
     </div>
+
+    <script>
+      function selectCommander(name) {
+        fetch(`/select_commander?name=${encodeURIComponent(name)}`)
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              window.location.href = "/deck";
+            } else {
+              alert("Commander not found.");
+            }
+          });
+      }
+    </script>
+
     {% else %}
     <p>No cards found with that name.</p>
     {% endif %}

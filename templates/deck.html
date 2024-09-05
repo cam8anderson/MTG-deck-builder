@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generated Deck</title>
+    <style>
+      .deck-section {
+        margin-bottom: 20px;
+      }
+      .deck-section h2 {
+        margin-bottom: 10px;
+      }
+      .card-list {
+        list-style-type: none;
+        padding: 0;
+      }
+      .card-list li {
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Your Generated Deck</h1>
+
+    <div class="deck-section">
+      <h2>Commander (1)</h2>
+      <ul class="card-list">
+        <li>{{ deck['Commander'].name }}</li>
+      </ul>
+    </div>
+
+    <div class="deck-section">
+      <h2>Lands ({{ deck['Lands']|length }})</h2>
+      <ul class="card-list">
+        {% for card in deck['Lands'] %}
+        <li>{{ card }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="deck-section">
+      <h2>Mana Ramp ({{ deck['Ramp']|length }})</h2>
+      <ul class="card-list">
+        {% for card in deck['Ramp'] %}
+        <li>{{ card }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="deck-section">
+      <h2>Card Draw ({{ deck['Card_Draw']|length }})</h2>
+      <ul class="card-list">
+        {% for card in deck['Card_Draw'] %}
+        <li>{{ card }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="deck-section">
+      <h2>Targeted Removal ({{ deck['Removal']|length }})</h2>
+      <ul class="card-list">
+        {% for card in deck['Removal'] %}
+        <li>{{ card }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="deck-section">
+      <h2>Board Wipes ({{ deck['Board_Wipes']|length }})</h2>
+      <ul class="card-list">
+        {% for card in deck['Board_Wipes'] %}
+        <li>{{ card }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="deck-section">
+      <h2>Synergistic Cards ({{ deck['Synergistic']|length }})</h2>
+      <ul class="card-list">
+        {% for card in deck['Synergistic'] %}
+        <li>{{ card }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div>
+      <h2>Total Cards: {{ full_deck|length }}</h2>
+    </div>
+  </body>
+</html>
