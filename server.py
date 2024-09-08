@@ -51,7 +51,7 @@ def deck():
 
     deck['Lands'] = fetch_lands(color_identity, 37)
     deck['Ramp'] = fetch_ramp_cards(color_identity, 10)
-    #deck['Card_Draw'] = fetch_card_draw_cards(color_identity, 10)
+    deck['Card_Draw'] = fetch_card_draw_cards(color_identity, 10)
     #deck['Removal'] = fetch_removal_cards(color_identity, 5)
     #deck['Board_Wipes'] = fetch_board_wipes(color_identity, 5)
     #deck['Synergistic'] = fetch_synergistic_cards(commander, color_identity, 32)

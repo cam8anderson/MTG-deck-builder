@@ -11,7 +11,6 @@ def fetch_commander(name):
         return None
     
     for card in results:
-        print(f"Found card: {card.name} - Types: {card.type}")
         # Ensure the card is a legendary creature or planeswalker suitable for commander
         if 'Legendary' in card.type and ('Creature' in card.type or 'Planeswalker' in card.type):
             return card
@@ -53,6 +52,9 @@ def fetch_lands(color_identity, count):
             for card in non_basic_lands:
                 if len(lands) < count:
                     lands.append(card['name'])
+
+    
+
     return lands
 
 def fetch_ramp_cards(color_identity, count):
@@ -62,8 +64,6 @@ def fetch_ramp_cards(color_identity, count):
     # Common ramp keywords
     ramp_keywords = ['add mana', 'search your library for a land', 'search your library for a basic', ]
     
-    query = Card.where(color_identity=''.join(color_identity)).where(types='Artifact,Creature').where(game_format='Commander')
-    print(query)
     results = query.all()
     random.shuffle(results)
     added = set()
@@ -82,9 +82,11 @@ def fetch_card_draw_cards(color_identity, count):
     card_draw = []
     query = Card.where(color_identity=''.join(color_identity)).where(game_format='Commander')
     
-    draw_keywords = ['draw a card', 'draw cards', 'equal to', 'discard and draw']
+    draw_keywords = ['draw a card', 'draw two cards', 'draw three cards', 'draw cards', 'draw']
     
     results = query.all()
+    print(f'found {len(results)} for card draw')
+    print(f'found {query} for this query')
     random.shuffle(results)
     added = set()
     for card in results:
